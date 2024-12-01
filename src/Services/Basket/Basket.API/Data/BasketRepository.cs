@@ -17,6 +17,15 @@ namespace Basket.API.Data
             return basket is null? throw new BasektNotFoundException(userName) : basket;
 
         }
+   
+            public async Task<IEnumerable<ShoppingCart>> GetAllBaskets(CancellationToken cancellationToken = default)
+            {
+            // Fetch all baskets (you'll need to implement this based on your data source)
+            var basket = await session.LoadAsync<ShoppingCart>(cancellationToken);
+            // return allBaskets ?? Enumerable.Empty<ShoppingCart>();
+
+            return (IEnumerable<ShoppingCart>)(basket is null ? throw new Exception(null) : basket);
+        }
 
         public async Task<ShoppingCart> StoreBasket(ShoppingCart basket, CancellationToken cancellationToken = default)
         {
